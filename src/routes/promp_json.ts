@@ -24,7 +24,7 @@ export default async function (app: FastifyInstance) {
 
         const completion = await openai.chat.completions.create({
             messages: [{"role": "user", "content": prompt}],
-            model: "gpt-3.5-turbo-1106",
+            model: "gpt-4-1106-preview",
             response_format: {type: "json_object"}
         });
 

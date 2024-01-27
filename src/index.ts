@@ -52,12 +52,11 @@ async function run() {
   console.log("Starting server")
   await app.ready();
 
-  process.env.IP ? await app.listen({
+  await app.listen({
     host: process.env.WEBSITE_HOSTNAME,
     port: +(process.env.PORT || 8080),
-  }) : await app.listen({port: +(process.env.PORT || 8080)})
-  console.log("DIr", dirname(__filename))
-  console.log(`Documentation running at http://${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}/docs`);
+  })
+  console.log(`Documentation running at https://${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}/docs`);
 }
 
 if (!process.env.OPENAI_API_KEY) {

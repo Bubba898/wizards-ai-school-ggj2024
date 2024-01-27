@@ -10,7 +10,7 @@ type PlayerState = {
     cards: Card[]
   }
   hand: Card[]
-  selected_cards?: Card[]
+  selected_cards: Card[]
 }
 
 type Lobby = {
@@ -74,7 +74,8 @@ function create_initial_player_state() {
     shop: {
       cards: []
     },
-    hand: []
+    hand: [],
+    selected_cards: []
   }
 }
 
@@ -141,4 +142,8 @@ export function next_round(lobby_id: string) {
   generate_shop(lobby_id, "1")
   lobbies[lobby_id].player_0.selected_cards = []
   lobbies[lobby_id].player_1.selected_cards = []
+}
+
+export function fight(lobby_id: string) {
+  console.log("fight")
 }

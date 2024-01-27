@@ -73,7 +73,7 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
     player_0: {
       health: lobbies[lobby_id].player_0.health,
     },
-    player_1: lobbies[lobby_id].player_0,
+    player_1: lobbies[lobby_id].player_1,
     fights: lobbies[lobby_id].fights
   }
 }

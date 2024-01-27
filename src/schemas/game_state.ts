@@ -4,20 +4,9 @@ export const card_type = z.enum(["character", "component", "merged"])
 
 export const card = z.object({
   name: z.string(),
-  description: z.string(),
   type: card_type,
-  cost: z.number(),
   url: z.string().optional(),
 })
-
-
-export const merged_card = z.object({
-  name: z.string(),
-  description: z.string(),
-  image_url: z.string(),
-})
-
-
 
 export const shop_state = z.object({
   cards: z.array(card),

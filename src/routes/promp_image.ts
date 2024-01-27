@@ -22,17 +22,26 @@ export default async function (app: FastifyInstance) {
 
         const timeStart = new Date().getTime()
 
-        const image = await openai.images.generate({
-            prompt,
-            model: "dall-e-3"
-        })
+        const result = await prompt_image(prompt)
 
         const timeCompletion = new Date().getTime()
 
         return {
-            dalleResponseUrl: image.data[0].url || "null",
+            dalleResponseUrl: result,
             executionTimeMs: timeCompletion - timeStart
         }
     }
   )
+}
+
+
+export async function prompt_image(prompt : string) {
+
+
+    const image = await openai.images.generate({
+        prompt,
+        model: "dall-e-3"
+    })
+
+    return image.data[0].url || "null"
 }

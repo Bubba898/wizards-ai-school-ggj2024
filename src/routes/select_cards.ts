@@ -1,17 +1,18 @@
 import {ZodTypeProvider} from "fastify-type-provider-zod";
 import {FastifyInstance} from "fastify";
 import {z} from "zod";
-import {card_type, game_state} from "../schemas/game_state";
-import {game_state_request, lobby_id} from "../schemas/lobby";
+import {game_state} from "../schemas/game_state";
+import {game_state_request} from "../schemas/lobby";
 import {
+  empty_shop,
   fight,
   get_lobby,
   get_lobby_game_state,
   get_player_state,
-  next_round,
+  merge,
   return_cards_to_pool
 } from "../state/state";
-import {CARDS} from "../state/Cards";
+import {Card, CARDS} from "../state/Cards";
 
 
 export default async function (app: FastifyInstance) {
@@ -30,19 +31,16 @@ export default async function (app: FastifyInstance) {
       }
     },
     async(request, reply) => {
-      const { player_id, lobby_id } = request.params
+      const { player_id, lobby_id } = request.params;
       const cards = request.body
-      if (cards.length  === 0) {
-        reply.code(400).send({error: "You need to select at least one card."})
-        return
-      }
-      const player_state = get_player_state(lobby_id, player_id)
 
       const lobby = get_lobby(lobby_id)
       if (!lobby) {
         reply.code(404).send({error: "Lobby not found"})
         return
       }
+
+      const player_state = get_player_state(lobby_id, player_id)
 
       if(!player_state.hand) {
         player_state.hand = []
@@ -55,20 +53,28 @@ export default async function (app: FastifyInstance) {
         }
       })
 
+      const selected_cards: Card[] = []
+
       cards.forEach(card => {
-        player_state.selected_cards.push(CARDS[card])
+        selected_cards.push(CARDS[card])
         player_state.hand = player_state.hand.filter((hand_card) => {
           return hand_card.name != card
         })
       })
 
-      return_cards_to_pool(lobby_id, player_id, player_state.shop.cards)
+      player_state.selected_cards = selected_cards
+
+      return_cards_to_pool(lobby, selected_cards)
+      empty_shop(lobby_id, player_id)
+
+      player_state.merged_card = await merge(selected_cards)
+      player_state.has_merged = true
+
       const game_state = get_lobby_game_state(lobby_id, player_id)
       reply.code(200).send(game_state)
 
-      if (lobby.player_0.selected_cards.length > 0 && lobby.player_1.selected_cards.length > 0) {
-        fight(lobby_id)
-        next_round(lobby_id)
+      if (lobby.player_0.has_merged && lobby.player_1.has_merged) {
+        fight(lobby).then(fight => lobby.fights.push(fight))
       }
     }
   )

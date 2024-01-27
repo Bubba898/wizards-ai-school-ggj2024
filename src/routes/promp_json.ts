@@ -22,18 +22,24 @@ export default async function (app: FastifyInstance) {
 
         const timeStart = new Date().getTime()
 
-        const completion = await openai.chat.completions.create({
-            messages: [{"role": "user", "content": prompt}],
-            model: "gpt-4-1106-preview",
-            response_format: {type: "json_object"}
-        });
+        const json = await prompt_json(prompt)
 
         const timeCompletion = new Date().getTime()
 
         return {
-            gptResponse: completion.choices[0]?.message?.content || "null",
+            gptResponse: json,
             executionTimeMs: timeCompletion - timeStart
         }
     }
   )
+}
+
+export async function prompt_json(prompt : string){
+    const completion = await openai.chat.completions.create({
+        messages: [{"role": "user", "content": prompt}],
+        model: "gpt-4-1106-preview",
+        response_format: {type: "json_object"}
+    });
+
+    return completion.choices[0]?.message?.content || "null"
 }

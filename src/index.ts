@@ -50,12 +50,12 @@ app.register(fastifyAutoload, {
 async function run() {
   await app.ready();
 
-  await app.listen({
+  process.env.ip ? await app.listen({
     host: process.env.IP,
-    port: 8080,
-  });
+    port: +(process.env.PORT || 8080),
+  }) : await app.listen({port: +(process.env.PORT || 8080)})
   console.log("DIr", dirname(__filename))
-  console.log(`Documentation running at http://${process.env.IP}:8080/docs`);
+  console.log(`Documentation running at http://${process.env.IP}:${process.env.PORT}/docs`);
 }
 
 if (!process.env.OPENAI_API_KEY) {

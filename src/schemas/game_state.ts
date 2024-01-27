@@ -1,6 +1,5 @@
 import {z} from "zod";
 
-
 export const merged_card = z.object({
   name: z.string(),
   description: z.string(),
@@ -29,6 +28,6 @@ export const player_state = z.object({
 })
 
 export const game_state = z.object({
+  player_0: player_state,
   player_1: player_state,
-  player_2: player_state,
-})
+}).optional()

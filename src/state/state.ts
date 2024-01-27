@@ -79,7 +79,7 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
 function create_initial_player_state(): PlayerState {
   return {
     balance: 100,
-    health: 100,
+    health: 50,
     shop: {
       cards: []
     },
@@ -217,10 +217,10 @@ export async function merge(cards: Card[]): Promise<Card | undefined>{
 export async function fight(lobby: Lobby): Promise<Fight> {
 
 
-    const player0CharacterCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
+  const player0CharacterCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
   const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)
 
-    const player1CharacterCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
+  const player1CharacterCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
   const player1ComponentCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)
 
 
@@ -256,6 +256,11 @@ export async function fight(lobby: Lobby): Promise<Fight> {
   generate_shop(lobby, "0", 5)
   generate_shop(lobby, "1", 5)
   resetBoard(lobby)
+  if(winner === "0") {
+    lobby.player_1.health -= 10
+  } else {
+    lobby.player_0.health -= 10
+  }
 
   return {winner, reason}
 }

@@ -7,7 +7,7 @@ import {make_lobby} from "../state/state";
 
 export default async function (app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    "/lobby/",
+    "/lobby",
     {
       schema: {
         response: {

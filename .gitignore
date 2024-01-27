@@ -1,4 +1,4 @@
 build
 node_modules
 /.idea/git_toolbox_prj.xml
-!/.local.development.env
+/.local.development.env

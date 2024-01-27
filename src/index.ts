@@ -20,6 +20,7 @@ app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
 
 dotenv.config();
+console.log("Starting...")
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -48,6 +49,7 @@ app.register(fastifyAutoload, {
   dirNameRoutePrefix: false,
 })
 async function run() {
+  console.log("Starting server")
   await app.ready();
 
   process.env.IP ? await app.listen({

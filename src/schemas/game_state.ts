@@ -24,4 +24,8 @@ export const player_state = z.object({
 export const game_state = z.object({
   player_0: player_state,
   player_1: player_state,
+  fights: z.array(z.object({
+    winner: z.enum(["0", "1"]).optional(),
+    reason: z.string().optional(),
+  })).optional(),
 }).optional()

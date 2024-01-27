@@ -1,8 +1,8 @@
 import {ZodTypeProvider} from "fastify-type-provider-zod";
 import {FastifyInstance} from "fastify";
 import {z} from "zod";
-import {card_type, game_state} from "../schemas/game_state";
-import {game_state_request, lobby_id} from "../schemas/lobby";
+import {game_state} from "../schemas/game_state";
+import {game_state_request} from "../schemas/lobby";
 import {get_lobby, get_lobby_game_state} from "../state/state";
 
 

@@ -104,13 +104,9 @@ function generate_opening_hand(lobby: Lobby, player_id: z.infer<typeof PlayerId>
   const cards = pull_cards_from_pool(lobby, amount)
 
   if (player_id == "0") {
-    lobby.player_0.shop = {
-      cards: cards
-    }
+    lobby.player_0.hand = cards
   } else {
-    lobby.player_1.shop = {
-      cards: cards
-    }
+    lobby.player_1.hand = cards
   }
 }
 

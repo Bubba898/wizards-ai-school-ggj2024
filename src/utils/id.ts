@@ -2,7 +2,7 @@
 
 export function make_id(length: number) {
     let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const charactersLength = characters.length;
     let counter = 0;
     while (counter < length) {

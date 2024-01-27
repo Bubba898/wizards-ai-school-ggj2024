@@ -21,8 +21,6 @@ app.setSerializerCompiler(serializerCompiler);
 
 dotenv.config();
 
-console.log(process.env)
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -53,10 +51,11 @@ async function run() {
   await app.ready();
 
   await app.listen({
-    port: 8000,
+    host: process.env.IP,
+    port: 8080,
   });
   console.log("DIr", dirname(__filename))
-  console.log(`Documentation running at http://localhost:8000/docs`);
+  console.log(`Documentation running at http://${process.env.IP}:8080/docs`);
 }
 
 if (!process.env.OPEN_API_KEY) {

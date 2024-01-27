@@ -6,6 +6,7 @@ export const card = z.object({
   name: z.string(),
   type: card_type,
   url: z.string().optional(),
+  cost: z.number(),
 })
 
 export const shop_state = z.object({

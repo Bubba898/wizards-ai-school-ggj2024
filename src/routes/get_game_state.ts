@@ -3,12 +3,12 @@ import {FastifyInstance} from "fastify";
 import {z} from "zod";
 import {card_type, game_state} from "../schemas/game_state";
 import {game_state_request, lobby_id} from "../schemas/lobby";
-import {get_lobby} from "../state/state";
+import {get_lobby, get_lobby_game_state} from "../state/state";
 
 
 export default async function (app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get(
-    "/game_state",
+    "/game_state/:lobby_id/:player_id",
     {
       schema: {
         params: game_state_request,
@@ -30,42 +30,7 @@ export default async function (app: FastifyInstance) {
       if(!lobby.all_joined) {
         return
       }
-      return {
-        player_0: {
-          balance: 100,
-          health: 100,
-          shop: {
-            cards: ["card_1", "card_2", "card_3"]
-          },
-          hand: [
-            {
-              type: card_type.enum.character,
-              name: "character_1"
-            },
-            {
-              type: card_type.enum.component,
-              name: "component_1"
-            }
-          ]
-        },
-        player_1: {
-          balance: 100,
-          health: 100,
-          shop: {
-            cards: ["card_1", "card_2", "card_3"]
-          },
-          hand: [
-            {
-              type: card_type.enum.character,
-              name: "character_1"
-            },
-            {
-              type: card_type.enum.component,
-              name: "component_1"
-            }
-          ]
-        }
-      }
+      return get_lobby_game_state(lobby_id, player_id)
     }
   )
 }

@@ -28,7 +28,7 @@ export default async function (app: FastifyInstance) {
         return
       }
       lobby.all_joined = true
-      return get_lobby_game_state(lobby_id, 1)
+      return get_lobby_game_state(lobby_id, "1")
     }
   )
 }

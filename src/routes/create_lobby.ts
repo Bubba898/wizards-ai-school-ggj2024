@@ -14,7 +14,7 @@ export default async function (app: FastifyInstance) {
           200: z.object({lobby_id: lobby_id}),
         },
         tags: ["Lobby"],
-        description: "Returns a lobby lobby_id"
+        description: "Returns a lobby id"
       }
     },
     async(request) => {

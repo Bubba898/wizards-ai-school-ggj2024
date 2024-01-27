@@ -242,14 +242,15 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
   const parsedFight = JSON.parse(fightResult)
 
-  const winnerKey = parsedFight.keys.find((key :string) => key.includes("win"))
+  const winnerKey = Object.keys(parsedFight).find((key :string) => key.includes("win"))
 
   if (winnerKey === undefined)
     return {}
 
   const winner = parsedFight[winnerKey].includes("0") ? "0" : "1"
 
-  const reason = parsedFight.reason;
+  const reason = Object.keys(parsedFight).includes("reason") ? parsedFight.reason : "Because it's better."
+
 
   generate_shop(lobby, "0", 5)
   generate_shop(lobby, "1", 5)

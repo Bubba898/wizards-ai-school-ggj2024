@@ -2,75 +2,93 @@ import {card_type} from "../schemas/game_state";
 import {z} from "zod";
 
 export type Card = {
-    name: string
-    action?: string
-    type: z.infer<typeof card_type>
-    cost: number
-    amount: number
+  name: string
+  action?: string
+  type: z.infer<typeof card_type>
+  cost: number
+  amount: number
   url?: string
-  }
-  type Cards = Record<string, Card>
+}
+type Cards = Record<string, Card>
 
 
-export const CARDS: Cards = [
-  {
-    "Type": 0,
-    "Name": "Cat",
-    "Action": ""
+export const CARDS: Cards = {
+  Cat: {
+    type: "character",
+    name: "Cat",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 0,
-    "Name": "Dinosaur",
-    "Action": ""
+  Dinosaur: {
+    type: "character",
+    name: "Dinosaur",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 0,
-    "Name": "Gorilla",
-    "Action": ""
+  Gorilla: {
+    type: "character",
+    name: "Gorilla",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 0,
-    "Name": "Knight",
-    "Action": ""
+  Knight: {
+    type: "character",
+    name: "Knight",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 0,
-    "Name": "Pirate",
-    "Action": ""
+  Pirate: {
+    type: "character",
+    name: "Pirate",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 0,
-    "Name": "Wizard",
-    "Action": ""
+  Wizard: {
+    type: "character",
+    name: "Wizard",
+    cost: 1,
+    amount: 1
   },
-  {
-    "Type": 1,
-    "Name": "Bionic_Arm",
-    "Action": "wearing a "
+  Bionic_Arm: {
+    type: "component",
+    name: "Bionic_Arm",
+    action: "wearing a ",
+    cost: 1,
+    amount: 1,
   },
-  {
-    "Type": 1,
-    "Name": "Force_Field_Shield",
-    "Action": "holding a "
+  Force_Field_Shield: {
+    type: "component",
+    name: "Force_Field_Shield",
+    action: "holding a ",
+    cost: 1,
+    amount: 1,
   },
-  {
-    "Type": 1,
-    "Name": "Frying_Pan",
-    "Action": "holding a "
+  Frying_Pan: {
+    type: "component",
+    name: "Frying_Pan",
+    action: "holding a ",
+    cost: 1,
+    amount: 1,
   },
-  {
-    "Type": 1,
-    "Name": "Jetpack",
-    "Action": "wearing a "
+  Jetpack: {
+    type: "component",
+    name: "Jetpack",
+    action: "wearing a ",
+    cost: 1,
+    amount: 1,
   },
-  {
-    "Type": 1,
-    "Name": "Laser_Glasses",
-    "Action": "wearing "
+  Laser_Glasses: {
+    type: "component",
+    name: "Laser_Glasses",
+    action: "wearing ",
+    cost: 1,
+    amount: 1,
   },
-  {
-    "Type": 1,
-    "Name": "Magnetic_Glove",
-    "Action": "wearing a "
+  Magnetic_Glove: {
+    type: "component",
+    name: "Magnetic_Glove",
+    action: "wearing a ",
+    cost: 1,
+    amount: 1,
   }
-]
+}

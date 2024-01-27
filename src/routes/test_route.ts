@@ -1,6 +1,6 @@
 import {ZodTypeProvider} from "fastify-type-provider-zod";
 import {FastifyInstance} from "fastify";
-import {TestParam, TestResponse} from "../schemas";
+import {TestParam, TestResponse} from "../schemas/test_schema";
 
 
 export default async function (app: FastifyInstance) {

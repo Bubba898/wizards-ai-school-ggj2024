@@ -13,7 +13,7 @@ export default async function (app: FastifyInstance) {
     {
       schema: {
         params: game_state_request,
-        body:z.array(z.string()),
+        body: z.array(z.string()),
         response: {
           200: game_state,
           404: z.object({error: z.string()})

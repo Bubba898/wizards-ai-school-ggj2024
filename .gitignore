@@ -1,7 +1,7 @@
 build
 node_modules
 /.idea/git_toolbox_prj.xml
-*/*.env
+**.env
 .DS_Store
 
 

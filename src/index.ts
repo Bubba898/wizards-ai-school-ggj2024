@@ -53,6 +53,7 @@ async function run() {
   await app.ready();
 
   await app.listen({
+    host: "0.0.0.0",
     port: +(process.env.PORT || 8080),
   })
   console.log(`Documentation running at https://${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}/docs`);

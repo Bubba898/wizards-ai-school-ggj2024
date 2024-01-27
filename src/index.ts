@@ -3,6 +3,10 @@ import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
 import { dirname } from 'node:path';
 
+import * as readline from 'readline';
+
+import dotenv from 'dotenv';
+
 import {
   jsonSchemaTransform,
   serializerCompiler,
@@ -14,6 +18,15 @@ import {join} from "node:path";
 const app = fastify();
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+
+dotenv.config();
+
+console.log(process.env)
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
 
 app.register(fastifySwagger, {
   openapi: {
@@ -46,4 +59,13 @@ async function run() {
   console.log(`Documentation running at http://localhost:8000/docs`);
 }
 
-run();
+if (!process.env.OPEN_API_KEY) {
+  console.error("OPEN_API_KEY is not set, please enter one")
+  rl.question("OPEN_API_KEY: ", (answer) => {
+    process.env.OPEN_API_KEY = answer
+    run()
+  })
+} else {
+  console.log("OPEN_API_KEY is set")
+  run()
+}

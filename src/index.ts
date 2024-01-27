@@ -32,11 +32,10 @@ app.register(fastifySwaggerUI, {
 });
 
 
-app.after(() =>{
-  app.register(fastifyAutoload, {
+app.register(fastifyAutoload, {
   dir: join(dirname(__filename), 'routes'),
   dirNameRoutePrefix: false,
-})})
+})
 async function run() {
   await app.ready();
 

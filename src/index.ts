@@ -50,7 +50,7 @@ app.register(fastifyAutoload, {
 async function run() {
   await app.ready();
 
-  process.env.ip ? await app.listen({
+  process.env.IP ? await app.listen({
     host: process.env.IP,
     port: +(process.env.PORT || 8080),
   }) : await app.listen({port: +(process.env.PORT || 8080)})

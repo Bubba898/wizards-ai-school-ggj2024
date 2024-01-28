@@ -204,14 +204,14 @@ export async function merge(cards: Card[]): Promise<Card | undefined>{
     return cards[0]
 
   const characterCards = cards.filter(card => card.type === card_type.enum.character).map(card => card.name)
-  const componentCards = cards.filter(card => card.type === card_type.enum.component).map(card => card.action)
+  const componentCards = cards.filter(card => card.type === card_type.enum.component).map(card => `${card.action} a ${card.name}`)
 
   const prompt = `Create a vibrant and humorous illustration of a character, a fusion of ${characterCards.join(", ")}, engaging in the action of ${componentCards.join(" and ")}, in a consistent, whimsical, and cartoon-ish art style. The illustration should depict the amalgamated character actively interacting with or using the component in the described manner. The character should be a seamless blend of the character elements, while the component with its associated action adds a dynamic and distinctive aspect to the scene. The design should be ideal for a card auto battler game, radiating a playful and entertaining atmosphere. The fusion character should be clearly visible and identifiable, capturing the essence of each character element and dynamically incorporating the component with the verb, contributing to the overall humorous and lighthearted theme of the game. Use bright and engaging colors to highlight the unique fusion and the playful essence of the image.`
 
   const url = await prompt_image(prompt)
 
   return {
-    name: characterCards.join(" "),
+    name: `${characterCards.join("-")} ${componentCards.join(" and ")}`,
     type: card_type.enum.merged,
     cost: 0,
     amount: 1,

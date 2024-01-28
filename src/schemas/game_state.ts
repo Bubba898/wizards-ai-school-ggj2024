@@ -21,6 +21,7 @@ export const player_state = z.object({
   hand: z.array(card).optional(),
   selected_cards: z.array(card).optional(),
   merged_card: card.optional(),
+  amount_of_cards_in_hand: z.number().optional(),
 })
 
 export const game_state = z.object({

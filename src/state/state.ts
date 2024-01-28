@@ -172,8 +172,8 @@ function get_initial_pool(): ShopPool {
   return {cards: Object.values(CARDS)}
 }
 
-export function return_cards_to_pool(lobby: Lobby, cards: Card[]) {
-  cards.forEach(card => {
+export function return_cards_to_pool(lobby: Lobby, shop: ShopPool) {
+  shop.cards.forEach(card => {
     const card_index = lobby.pool.cards.findIndex((hand_card) => {
       return hand_card.name == card.name
     })
@@ -183,6 +183,8 @@ export function return_cards_to_pool(lobby: Lobby, cards: Card[]) {
       lobby.pool.cards[card_index].amount += 1
     }
   })
+
+  shop.cards = []
 }
 
 export function empty_shop(lobby_id: string, player_id: string) {

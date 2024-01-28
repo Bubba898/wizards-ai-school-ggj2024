@@ -167,7 +167,7 @@ export const CARDS: Cards = {
     cost: 1,
     amount: 1
   },
-  Carnival: {
+  "Carnival mask": {
     type: 'component',
     name: "Carnival mask",
     action: "wearing a ",

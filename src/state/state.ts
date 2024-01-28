@@ -263,7 +263,6 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
   generate_shop(lobby, "0", 5)
   generate_shop(lobby, "1", 5)
-  await resetBoard(lobby)
   if(winner === "0") {
     lobby.player_1.health -= 10
   } else {
@@ -282,7 +281,7 @@ async function countdown(lobby: Lobby) {
   }
 }
 
-async function resetBoard(lobby : Lobby){
+export async function resetBoard(lobby : Lobby){
   await countdown(lobby)
   lobby.next_round_in = undefined
   lobby.player_0.selected_cards = undefined

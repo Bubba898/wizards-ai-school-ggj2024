@@ -9,7 +9,7 @@ import {
   get_lobby,
   get_lobby_game_state,
   get_player_state,
-  merge,
+  merge, resetBoard,
   return_cards_to_pool
 } from "../state/state";
 import {Card, CARDS} from "../state/Cards";
@@ -74,7 +74,10 @@ export default async function (app: FastifyInstance) {
       reply.code(200).send(game_state)
 
       if (lobby.player_0.has_merged && lobby.player_1.has_merged) {
-        fight(lobby).then(fight => lobby.fights.push(fight))
+        fight(lobby).then(async(fight) => {
+          lobby.fights.push(fight)
+          await resetBoard(lobby)
+        })
       }
     }
   )

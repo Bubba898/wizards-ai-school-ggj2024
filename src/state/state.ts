@@ -25,7 +25,7 @@ type Lobby = {
   pool: ShopPool
   fights: Fight[]
   next_round_in?: number
-  open_api_key?: string
+  open_ai_api_key?: string
 }
 
 type ShopPool = {
@@ -40,7 +40,7 @@ type Fight = {
 export const lobbies: {[key: string]: Lobby} = {}
 
 
-export function make_lobby(lobby_id: string, open_api_key: string) {
+export function make_lobby(lobby_id: string, open_ai_api_key: string) {
   const lobby = lobbies[lobby_id] = {
     player_0: create_initial_player_state(),
     player_1: create_initial_player_state(),
@@ -48,7 +48,7 @@ export function make_lobby(lobby_id: string, open_api_key: string) {
     pool: get_initial_pool(),
     fights: [],
     next_round_in: undefined,
-    open_api_key: Object.keys(process.env).includes(open_api_key) ? process.env[open_api_key] : open_api_key
+    open_ai_api_key: Object.keys(process.env).includes(open_ai_api_key) ? process.env[open_ai_api_key] : open_ai_api_key
   }
 
   generate_opening_hand(lobby, "0", 4)
@@ -210,7 +210,7 @@ export async function merge(cards: Card[], lobby: Lobby): Promise<Card | undefin
 
   const prompt = `Create a vibrant and humorous illustration of a character, a fusion of ${characterCards.join(", ")}, engaging in the action of ${componentCards.join(" and ")}, in a consistent, whimsical, and cartoon-ish art style. The illustration should depict the amalgamated character actively interacting with or using the component in the described manner. The character should be a seamless blend of the character elements, while the component with its associated action adds a dynamic and distinctive aspect to the scene. The design should be ideal for a card auto battler game, radiating a playful and entertaining atmosphere. The fusion character should be clearly visible and identifiable, capturing the essence of each character element and dynamically incorporating the component with the verb, contributing to the overall humorous and lighthearted theme of the game. Use bright and engaging colors to highlight the unique fusion and the playful essence of the image.`
 
-  const url = await prompt_image(prompt, lobby.open_api_key || "")
+  const url = await prompt_image(prompt, lobby.open_ai_api_key || "")
 
   return {
     name: `${characterCards.join("-")} ${componentCards.join(" and ")}`,
@@ -249,7 +249,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
   Try really hard to find a result, draws or being inconclusive is not an option.
   Give me the response in a json with the winning player and the reason`
 
-  const fightResult = await prompt_json(prompt, lobby.open_api_key || "")
+  const fightResult = await prompt_json(prompt, lobby.open_ai_api_key || "")
 
   const parsedFight = JSON.parse(fightResult)
 

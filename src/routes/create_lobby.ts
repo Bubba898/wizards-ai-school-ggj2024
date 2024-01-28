@@ -10,7 +10,7 @@ export default async function (app: FastifyInstance) {
     "/lobby",
     {
       schema: {
-        body: z.object({open_api_key: z.string()}),
+        body: z.object({open_ai_api_key: z.string()}),
         response: {
           200: z.object({lobby_id: lobby_id}),
         },
@@ -20,8 +20,8 @@ export default async function (app: FastifyInstance) {
     },
     async(request) => {
       const id = make_id(5)
-      const open_api_key = request.body.open_api_key
-      make_lobby(id, open_api_key)
+      const open_ai_api_key = request.body.open_ai_api_key
+      make_lobby(id, open_ai_api_key)
       return {lobby_id: id}
     }
   )

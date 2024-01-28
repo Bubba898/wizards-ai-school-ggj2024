@@ -48,7 +48,7 @@ export default async function (app: FastifyInstance) {
         return CARDS[card].cost
       }).reduce((acc: number, cost) => {
         return acc + cost
-      })
+      }, 0)
 
       if(player_state.balance < combined_cost) {
         reply.code(400).send({error: "Not enough money"})

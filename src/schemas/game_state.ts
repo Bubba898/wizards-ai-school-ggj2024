@@ -32,4 +32,5 @@ export const game_state = z.object({
     winner: z.enum(["0", "1"]).optional(),
     reason: z.string().optional(),
   }).optional(),
+  round_counter: z.number().optional(),
 }).optional()

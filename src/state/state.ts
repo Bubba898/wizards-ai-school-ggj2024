@@ -75,6 +75,7 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
         ready: lobbies[lobby_id].player_1.ready
       },
       fight: lobbies[lobby_id].fight,
+      round_counter: lobbies[lobby_id].round_counter
     }
   }
   return {
@@ -86,6 +87,7 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
     },
     player_1: lobbies[lobby_id].player_1,
     fight: lobbies[lobby_id].fight,
+    round_counter: lobbies[lobby_id].round_counter
   }
 }
 

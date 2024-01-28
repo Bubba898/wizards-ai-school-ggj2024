@@ -77,7 +77,6 @@ export default async function (app: FastifyInstance) {
       if (lobby.player_0.has_merged && lobby.player_1.has_merged) {
         fight(lobby).then(async(fight) => {
           lobby.fight = fight
-          await resetBoard(lobby)
         })
       }
     }

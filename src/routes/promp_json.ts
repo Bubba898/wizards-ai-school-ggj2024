@@ -1,7 +1,7 @@
 import {ZodTypeProvider} from "fastify-type-provider-zod";
 import {FastifyInstance} from "fastify";
-import {openai} from "../openai/openai";
 import {PromptBody, PromptResponse} from "../schemas/prompt";
+import OpenAI from "openai";
 
 
 export default async function (app: FastifyInstance) {
@@ -22,7 +22,7 @@ export default async function (app: FastifyInstance) {
 
         const timeStart = new Date().getTime()
 
-        const json = await prompt_json(prompt)
+        const json = await prompt_json(prompt, "")
 
         const timeCompletion = new Date().getTime()
 
@@ -34,8 +34,8 @@ export default async function (app: FastifyInstance) {
   )
 }
 
-export async function prompt_json(prompt : string){
-    const completion = await openai.chat.completions.create({
+export async function prompt_json(prompt : string, key: string){
+    const completion = await new OpenAI({apiKey: key}).chat.completions.create({
         messages: [{"role": "user", "content": prompt}],
         model: "gpt-4-1106-preview",
         response_format: {type: "json_object"}

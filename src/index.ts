@@ -59,13 +59,4 @@ async function run() {
   console.log(`Documentation running at https://${process.env.WEBSITE_HOSTNAME}:${process.env.PORT}/docs`);
 }
 
-if (!process.env.OPENAI_API_KEY) {
-  console.error("OPENAI_API_KEY is not set, please enter one")
-  rl.question("OPENAI_API_KEY: ", (answer) => {
-    process.env.OPENAI_API_KEY = answer
-    run()
-  })
-} else {
-  console.log("OPEN_API_KEY is set")
-  run()
-}
+run()

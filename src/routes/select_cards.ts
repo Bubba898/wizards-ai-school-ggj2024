@@ -67,7 +67,7 @@ export default async function (app: FastifyInstance) {
       return_cards_to_pool(lobby, selected_cards)
       empty_shop(lobby_id, player_id)
 
-      player_state.merged_card = await merge(selected_cards)
+      player_state.merged_card = await merge(selected_cards, lobby)
       player_state.has_merged = true
 
       const game_state = get_lobby_game_state(lobby_id, player_id)

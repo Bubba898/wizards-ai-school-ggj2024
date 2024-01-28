@@ -68,7 +68,8 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
       player_1: {
         health: lobbies[lobby_id].player_1.health,
       },
-      fights: lobbies[lobby_id].fights
+      fights: lobbies[lobby_id].fights,
+      next_round_in: lobbies[lobby_id].next_round_in
     }
   }
   return {
@@ -76,7 +77,8 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
       health: lobbies[lobby_id].player_0.health,
     },
     player_1: lobbies[lobby_id].player_1,
-    fights: lobbies[lobby_id].fights
+    fights: lobbies[lobby_id].fights,
+    next_round_in: lobbies[lobby_id].next_round_in
   }
 }
 
@@ -218,7 +220,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
 
   const player0CharacterCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
-  const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)
+  const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => `${card.action} a ${card.name}`)
 
   const player1CharacterCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
   const player1ComponentCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)

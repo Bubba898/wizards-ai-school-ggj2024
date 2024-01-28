@@ -91,8 +91,8 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
 
 function create_initial_player_state(): PlayerState {
   return {
-    balance: 100,
-    health: 50,
+    balance: 5,
+    health: 3,
     shop: {
       cards: []
     },
@@ -266,9 +266,9 @@ export async function fight(lobby: Lobby): Promise<Fight> {
   generate_shop(lobby, "0", 5)
   generate_shop(lobby, "1", 5)
   if(winner === "0") {
-    lobby.player_1.health -= 10
+    lobby.player_1.health -= 1
   } else {
-    lobby.player_0.health -= 10
+    lobby.player_0.health -= 1
   }
 
   return {winner, reason}

@@ -42,5 +42,5 @@ export async function prompt_audio(prompt : string, key: string){
         model: "tts-1-hd"
     })
 
-    return audio.url;
+    return `${audio}`;
 }

@@ -233,7 +233,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
   const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => `${card.action} ${card.name}`)
 
   const player1CharacterCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
-  const player1ComponentCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)
+  const player1ComponentCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => `${card.action} ${card.name}`)
 
 
   if (player0CharacterCards === undefined && player1ComponentCards === undefined)
@@ -247,8 +247,8 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
   const prompt = `Evaluate the ludicrous card combo showdown below, pulled from an avant-garde card game, and declare the round champ. Every card is an amusing mashup of personalities and escapades. With a dollop of mirth, succinctly justify your winner's choice.
 
-  Player 0: fusion of ${player0CharacterCards.join(", ")}${player0ComponentCards ? `, engaging in the action of ${player0ComponentCards.join(" and ")}` : ""}
-  Player 1: fusion of ${player1CharacterCards.join(", ")}${player1ComponentCards ? `, engaging in the action of ${player1ComponentCards.join(" and ")}` : ""}
+  Player 0: ${ player0CharacterCards.length === 1 ? `a ${player0CharacterCards[0]}`: `fusion of ${player0CharacterCards.join(", ")}`}${player0ComponentCards ? `, engaging in the action of ${player0ComponentCards.join(" and ")}` : ""}
+  Player 1: ${ player1CharacterCards.length === 1 ? `a ${player1CharacterCards[0]}`: `fusion of ${player1CharacterCards.join(", ")}`}${player1ComponentCards ? `, engaging in the action of ${player1ComponentCards.join(" and ")}` : ""}
   Try really hard to find a result, draws or being inconclusive is not an option.
   Give me the response in a json with the winning player and the reason`
 
@@ -289,6 +289,8 @@ export async function resetBoard(lobby : Lobby){
   lobby.player_1.merged_card = undefined
   lobby.player_0.ready = false
   lobby.player_1.ready = false
+  lobby.player_0.balance++
+  lobby.player_1.balance++
 }
 
 export function resetMergedCards(lobby : Lobby, player: z.infer<typeof PlayerId>){

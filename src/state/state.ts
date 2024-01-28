@@ -244,7 +244,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
   Player 0: fusion of ${player0CharacterCards.join(", ")}${player0ComponentCards ? `, engaging in the action of ${player0ComponentCards.join(" and ")}` : ""}
   Player 1: fusion of ${player1CharacterCards.join(", ")}${player1ComponentCards ? `, engaging in the action of ${player1ComponentCards.join(" and ")}` : ""}
-
+  Try really hard to find a result, draws or being inconclusive is not an option.
   Give me the response in a json with the winning player and the reason`
 
   const fightResult = await prompt_json(prompt)

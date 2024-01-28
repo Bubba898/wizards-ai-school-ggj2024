@@ -68,7 +68,8 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
       player_0: lobbies[lobby_id].player_0,
       player_1: {
         health: lobbies[lobby_id].player_1.health,
-        amount_of_cards_in_hand: lobbies[lobby_id].player_1.hand.length
+        amount_of_cards_in_hand: lobbies[lobby_id].player_1.hand.length,
+        merged_card: lobbies[lobby_id].player_1.merged_card,
       },
       fights: lobbies[lobby_id].fights,
       next_round_in: lobbies[lobby_id].next_round_in
@@ -77,7 +78,8 @@ export function get_lobby_game_state(lobby_id: string, player_id: z.infer<typeof
   return {
     player_0: {
       health: lobbies[lobby_id].player_0.health,
-      amount_of_cards_in_hand: lobbies[lobby_id].player_0.hand.length
+      amount_of_cards_in_hand: lobbies[lobby_id].player_0.hand.length,
+      merged_card: lobbies[lobby_id].player_0.merged_card,
     },
     player_1: lobbies[lobby_id].player_1,
     fights: lobbies[lobby_id].fights,

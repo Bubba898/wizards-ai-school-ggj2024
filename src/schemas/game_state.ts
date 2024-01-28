@@ -30,4 +30,5 @@ export const game_state = z.object({
     winner: z.enum(["0", "1"]).optional(),
     reason: z.string().optional(),
   })).optional(),
+  next_round_in: z.number().optional(),
 }).optional()

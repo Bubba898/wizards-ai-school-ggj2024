@@ -23,6 +23,7 @@ type Lobby = {
   all_joined: boolean
   pool: ShopPool
   fights: Fight[]
+  next_round_in?: number
 }
 
 type ShopPool = {
@@ -43,7 +44,8 @@ export function make_lobby(lobby_id: string) {
     player_1: create_initial_player_state(),
     all_joined: false,
     pool: get_initial_pool(),
-    fights: []
+    fights: [],
+    next_round_in: undefined
   }
 
   generate_opening_hand(lobby, "0", 4)
@@ -254,7 +256,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
   generate_shop(lobby, "0", 5)
   generate_shop(lobby, "1", 5)
-  resetBoard(lobby)
+  await resetBoard(lobby)
   if(winner === "0") {
     lobby.player_1.health -= 10
   } else {
@@ -264,7 +266,17 @@ export async function fight(lobby: Lobby): Promise<Fight> {
   return {winner, reason}
 }
 
-export function resetBoard(lobby : Lobby){
+// 10 second countdown timer that keeps track of the time left
+async function countdown(lobby: Lobby) {
+  lobby.next_round_in = 10
+  while (lobby.next_round_in > 0) {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    lobby.next_round_in -= 1
+  }
+}
+
+async function resetBoard(lobby : Lobby){
+  await countdown(lobby)
   lobby.player_0.selected_cards = undefined
   lobby.player_1.selected_cards = undefined
   lobby.player_0.merged_card = undefined

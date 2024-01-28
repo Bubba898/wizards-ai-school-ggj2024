@@ -4,7 +4,7 @@ import {z} from "zod";
 import {game_state} from "../schemas/game_state";
 import {game_state_request} from "../schemas/lobby";
 import {
-  get_lobby,
+  get_lobby, get_lobby_game_state,
   get_player_state,
   resetBoard,
 } from "../state/state";
@@ -41,6 +41,8 @@ export default async function (app: FastifyInstance) {
       if (lobby.player_0.ready && lobby.player_1.ready){
         await resetBoard(lobby)
       }
+
+      return get_lobby_game_state(lobby_id, player_id)
     }
   )
 }

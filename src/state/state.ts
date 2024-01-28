@@ -206,7 +206,7 @@ export async function merge(cards: Card[], lobby: Lobby): Promise<Card | undefin
     return cards[0]
 
   const characterCards = cards.filter(card => card.type === card_type.enum.character).map(card => card.name)
-  const componentCards = cards.filter(card => card.type === card_type.enum.component).map(card => `${card.action} a ${card.name}`)
+  const componentCards = cards.filter(card => card.type === card_type.enum.component).map(card => `${card.action} ${card.name}`)
 
   const prompt = `Create a vibrant and humorous illustration of a character, a fusion of ${characterCards.join(", ")}, engaging in the action of ${componentCards.join(" and ")}, in a consistent, whimsical, and cartoon-ish art style. The illustration should depict the amalgamated character actively interacting with or using the component in the described manner. The character should be a seamless blend of the character elements, while the component with its associated action adds a dynamic and distinctive aspect to the scene. The design should be ideal for a card auto battler game, radiating a playful and entertaining atmosphere. The fusion character should be clearly visible and identifiable, capturing the essence of each character element and dynamically incorporating the component with the verb, contributing to the overall humorous and lighthearted theme of the game. Use bright and engaging colors to highlight the unique fusion and the playful essence of the image.`
 
@@ -227,7 +227,7 @@ export async function fight(lobby: Lobby): Promise<Fight> {
 
 
   const player0CharacterCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
-  const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => `${card.action} a ${card.name}`)
+  const player0ComponentCards = lobby.player_0.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => `${card.action} ${card.name}`)
 
   const player1CharacterCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.character).map(card => card.name)
   const player1ComponentCards = lobby.player_1.selected_cards?.filter(card => card.type === card_type.enum.component).map(card => card.action)

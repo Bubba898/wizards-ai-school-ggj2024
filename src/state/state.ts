@@ -289,6 +289,8 @@ export async function resetBoard(lobby : Lobby){
   lobby.player_1.merged_card = undefined
   lobby.player_0.ready = false
   lobby.player_1.ready = false
+  lobby.player_0.balance++
+  lobby.player_1.balance++
 }
 
 export function resetMergedCards(lobby : Lobby, player: z.infer<typeof PlayerId>){

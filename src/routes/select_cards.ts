@@ -46,12 +46,12 @@ export default async function (app: FastifyInstance) {
         player_state.hand = []
       }
 
-      cards.forEach(card => {
-        if(!player_state.hand.map((card) => card.name).includes(card)) {
-          reply.code(400).send({error: "You don't have that card in your hand."})
-          return
-        }
-      })
+      // cards.forEach(card => {
+      //   if(!player_state.hand.map((card) => card.name).includes(card)) {
+      //     reply.code(400).send({error: "You don't have that card in your hand."})
+      //     return
+      //   }
+      // })
 
       const selected_cards: Card[] = []
 

@@ -282,6 +282,7 @@ async function countdown(lobby: Lobby) {
 
 async function resetBoard(lobby : Lobby){
   await countdown(lobby)
+  lobby.next_round_in = undefined
   lobby.player_0.selected_cards = undefined
   lobby.player_1.selected_cards = undefined
   lobby.player_0.merged_card = undefined

@@ -63,7 +63,9 @@ export default async function (app: FastifyInstance) {
       })
       player_state.balance -= combined_cost
 
-      return_cards_to_pool(lobby, player_state.shop)
+      return_cards_to_pool(lobby, player_state.shop.cards)
+      player_state.shop.cards = []
+
       return get_lobby_game_state(lobby_id, player_id)
     }
   )

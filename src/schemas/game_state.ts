@@ -22,14 +22,14 @@ export const player_state = z.object({
   selected_cards: z.array(card).optional(),
   merged_card: card.optional(),
   amount_of_cards_in_hand: z.number().optional(),
+  ready: z.boolean(),
 })
 
 export const game_state = z.object({
   player_0: player_state,
   player_1: player_state,
-  fights: z.array(z.object({
+  fight: z.object({
     winner: z.enum(["0", "1"]).optional(),
     reason: z.string().optional(),
-  })).optional(),
-  next_round_in: z.number().optional(),
+  }).optional(),
 }).optional()
